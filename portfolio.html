@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Karthick | AI Engineer & Enterprise Architect Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #030712;
+            --bg-gradient: radial-gradient(circle at 15% 25%, rgba(14, 33, 70, 0.4) 0%, transparent 45%), 
+                            radial-gradient(circle at 85% 65%, rgba(17, 24, 39, 0.6) 0%, transparent 50%);
+            --card-bg: rgba(17, 24, 39, 0.45);
+            --card-border: rgba(30, 41, 59, 0.5);
+            --accent-blue: #00A3FF;
+			--accent-purple: #8A57FF;
+			--accent-green: #00E676;
+            --accent-cyan: #00ddff;
+            --text-main: #F1F5F9;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-dark);
+            background-image: var(--bg-gradient);
+            color: var(--text-main);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Fixed Navigation Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(3, 7, 18, 0.7);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(30, 41, 59, 0.4);
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.25rem 2rem;
+        }
+
+        .logo {
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 700;
+            color: #FFFFFF;
+            font-size: 1.25rem;
+            text-decoration: none;
+            letter-spacing: -0.5px;
+        }
+
+        .logo span {
+            color: var(--accent-cyan);
+        }
+
+        nav a {
+            color: #FFFFFF;
+            text-decoration: none;
+            margin-left: 2rem;
+            font-weight: 500;
+            font-size: 1rem;
+            transition: color 0.3s;
+            cursor: pointer;
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--accent-blue);
+        }
+
+        /* Section Layouts */
+        .view-section {
+            display: none;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 9rem 2rem 5rem 2rem;
+            min-height: 100vh;
+        }
+
+        .view-section.active {
+            display: block;
+        }
+
+        /* HOME / HERO PAGE */
+        .hero-container {
+            display: flex;
+            justify-content: space-between;
+            gap: 4rem;
+            padding: 0 0 0 0;
+        }
+
+        @media (max-width: 900px) {
+            .hero-container {
+                flex-direction: column-reverse;
+                text-align: center;
+                gap: 2rem;
+            }
+        }
+
+        .hero-text {
+            flex: 1;
+        }
+
+        .hero h1 {
+            font-size: 3.2rem;
+            font-weight: 700;
+            letter-spacing: -1px;
+            margin-bottom: 1.5rem;
+            color: #FFFFFF;
+			flex: 1;
+			background:linear-gradient(135deg, var(--text-main) 30%, var(--accent-blue) 70%, var(--accent-purple));
+			-webkit-background-clip: text;
+			-webkit-text-fill-color: transparent;
+        }
+
+        .hero h1 span {
+            color: var(--accent-cyan);
+            font-weight: 400;
+        }
+
+        .hero p {
+            font-size: 1.15rem;
+            color: var(--text-muted);
+            margin-bottom: 2.5rem;
+            line-height: 1.7;
+        }
+
+        .hero-image-wrapper {
+            flex-shrink: 0;
+        }
+
+        .profile-img-container {
+            width: 260px;
+            height: 260px;
+            border-radius: 50%;
+            padding: 6px;
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan));
+            box-shadow: 0 0 30px rgba(0, 191, 255, 0.2);
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .profile-img-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+            background-color: #111827;
+            object-position: center 20%;
+        }
+
+        /* Action Buttons */
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        @media (max-width: 900px) {
+            .hero-buttons {
+                justify-content: center;
+            }
+        }
+
+        .btn {
+            padding: 0.75rem 1.75rem;
+            font-weight: 600;
+            font-size: 0.95rem;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background-color: #00A3FF;
+            color: #000000;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--accent-cyan);
+            box-shadow: 0 0 20px rgba(0, 221, 255, 0.3);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: #FFFFFF;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-secondary:hover {
+            border-color: #FFFFFF;
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+
+        /* Quick Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 5rem;
+            margin-top: 2rem;
+        }
+
+        @media (max-width: 900px) {
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 600px) {
+            .stats-grid { grid-template-columns: 1fr; }
+        }
+
+        .stat-card {
+            background: rgba(10, 15, 30, 0.7);
+            border: 1px solid var(--card-border);
+            border-radius: 8px;
+            padding: 2.5rem 1.5rem;
+            text-align: center;
+            transition: border-color 0.3s ease;
+        }
+
+        .stat-card:hover {
+            border-color: rgba(0, 163, 255, 0.4);
+        }
+
+        .stat-num {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #FFFFFF;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Paradigm Pivot Ledger */
+        .paradigm-section {
+            margin-top: 2rem;
+        }
+
+        .section-heading {
+            font-size: 1.75rem;
+            color: #FFFFFF;
+            margin-bottom: 1.5rem;
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            border-left: 4px solid #00A3FF;
+            padding-left: 1rem;
+        }
+
+        .ledger-wrapper {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .ledger-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .ledger-table th, .ledger-table td {
+            padding: 1.25rem 1.5rem;
+            text-align: left;
+        }
+
+        .ledger-table th {
+            background: rgba(15, 23, 42, 0.6);
+            color: var(--accent-blue);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            font-weight: 600;
+            border-bottom: 1px solid var(--card-border);
+        }
+
+        .ledger-table td {
+            border-bottom: 1px solid rgba(30, 41, 59, 0.3);
+            font-size: 0.95rem;
+        }
+
+        .ledger-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .ledger-table td:first-child {
+            font-family: 'JetBrains Mono', monospace;
+            color: #FFFFFF;
+            width: 40%;
+        }
+
+        .ledger-table td:last-child {
+            color: var(--text-muted);
+        }
+
+        /* SKILLS VIEW PAGE */
+        .skills-category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .skills-cat-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            padding: 2rem;
+        }
+
+        .skills-cat-card h3 {
+            color: var(--accent-cyan);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.1rem;
+            margin-bottom: 1.25rem;
+            border-bottom: 1px solid var(--card-border);
+            padding-bottom: 0.5rem;
+        }
+
+        .skills-list-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .skill-tag {
+            background: rgba(30, 41, 59, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 0.4rem 0.8rem;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            color: var(--text-main);
+        }
+
+        /* PROJECTS VIEW PAGE */
+        .projects-header-desc {
+            color: var(--text-muted);
+            margin-bottom: 3rem;
+            font-size: 1.05rem;
+        }
+
+        .aiml-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .aiml-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 8px;
+            padding: 2.5rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
+                        box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+                        border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .aiml-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #00A3FF, var(--accent-cyan));
+            transition: width 0.4s ease, left 0.4s ease;
+        }
+
+        .aiml-card:hover {
+            transform: translateY(-6px);
+            border-color: rgba(0, 163, 255, 0.4);
+            box-shadow: 0 12px 30px rgba(0, 163, 255, 0.15);
+        }
+
+        .aiml-card:hover::after {
+            width: 100%;
+            left: 0;
+        }
+
+        .aiml-card h3 {
+            color: #00bfff;
+            font-size: 1.35rem;
+            margin-bottom: 0.85rem;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        .aiml-card:hover h3 {
+            color: var(--accent-cyan);
+        }
+
+        .aiml-card p {
+            color: #94A3B8;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* CONTACT VIEW PAGE */
+        .contact-wrapper {
+            max-width: 600px;
+            margin: 0 auto;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            padding: 3rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--accent-cyan);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+        }
+
+        .form-group input, .form-group textarea {
+            width: 100%;
+            background: rgba(3, 7, 18, 0.6);
+            border: 1px solid var(--card-border);
+            padding: 0.8rem 1rem;
+            color: #FFFFFF;
+            border-radius: 6px;
+            font-family: inherit;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus, .form-group textarea:focus {
+            outline: none;
+            border-color: #00A3FF;
+        }
+
+        /* Footer */
+        footer {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem 2rem 2rem;
+            border-top: 1px solid rgba(30, 41, 59, 0.3);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        @media (max-width: 600px) {
+            footer { flex-direction: column; gap: 1rem; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="nav-container">
+            <a onclick="switchPage('home')" class="logo">Karthick<span>.AI</span></a>
+            <nav>
+                <a onclick="switchPage('home')" id="nav-home" class="active">Home</a>
+                <a onclick="switchPage('projects')" id="nav-projects">Projects</a>
+                <a onclick="switchPage('skills')" id="nav-skills">Skills</a>
+                <a onclick="switchPage('contact')" id="nav-contact">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <section id="home-view" class="view-section active">
+			<!-- <header class="hero">
+                <h1>Azure Integration Patterns Evolved into Multi-Agent AI</h1>
+                <p>Former Azure Integration Engineer specializing in transforming APIs, enterprise messaging systems, and strict logic workflows into resilient, self-correcting agentic AI systems.</p>
+                <div class="cta-group">
+                    <button class="btn btn-primary" onclick="switchPage('projects')">Explore Agent System Projects</button>
+                    <button class="btn btn-secondary" onclick="switchPage('contact')">Get In Touch</button>
+                </div>
+            </header> -->
+        <div class="hero hero-container">
+            <div class="hero">
+                <h1>Azure Integration Architect | AI Engineer</h1>
+                <p>17+ years of enterprise experience in Microsoft &amp; Azure technologies. Now focused on Machine Learning, Generative AI, LLMs, and RAG systems.Now focused on Machine Learning, Generative AI, LLMs, and RAG systems.Now focused on Machine Learning, Generative AI, LLMs, and RAG systems.Now focused on Machine Learning, Generative AI, LLMs, and RAG systems.Now focused on Machine Learning, Generative AI, LLMs, and RAG systems.Now focused on Machine Learning, Generative AI, LLMs, and RAG systems.Now focused on Machine Learning, Generative AI, LLMs, and RAG systems.Now focused on Machine Learning, Generative AI, LLMs, and RAG systems.Now focused on Machine Learning, Generative AI, LLMs, and RAG systems.Now focused on Machine Learning, Generative AI, LLMs, and RAG systems.</p>
+                
+				<div class="hero-buttons">
+                    <a onclick="switchPage('projects')" class="btn btn-primary">Explore AI Projects</a>
+                    <a onclick="switchPage('contact')" class="btn btn-secondary">Contact Me</a>
+                </div>
+            </div>
+           <div class="hero-image-wrapper">
+			<div class="profile-img-container">
+				<img src="./img/profile.jpg" id="profile-pic" alt="Karthick Profile Headshot" style="width:250px; height:250px; object-fit:cover;">
+			</div>
+		   </div>
+        </div>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-num">17+</div>
+                <div class="stat-label">Years Experience</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-num">Azure</div>
+                <div class="stat-label">Cloud Architecture</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-num">AI/ML</div>
+                <div class="stat-label">Generative AI Focus</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-num">Enterprise</div>
+                <div class="stat-label">System Design</div>
+            </div>
+        </div>
+
+        <div class="paradigm-section">
+            <h2 class="section-heading">Enterprise Architecture Pivot Matrix</h2>
+            <div class="ledger-wrapper">
+                <table class="ledger-table">
+                    <thead>
+                        <tr>
+                            <th>Azure Integration Pattern</th>
+                            <th>Generative &amp; Agentic AI Mapping</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Azure Logic Apps / Step Functions</td>
+                            <td>LangGraph Stateful Routing, Deterministic DAG Workflows, and Multi-Agent Systems</td>
+                        </tr>
+                        <tr>
+                            <td>Azure API Management (APIM)</td>
+                            <td>PII Masking, Runaway Token Rate-Limiting, and Guardrail Policy Interceptors (NeMo/LlamaGuard)</td>
+                        </tr>
+                        <tr>
+                            <td>Service Bus / Event Hubs / Queues</td>
+                            <td>Asynchronous Agent Event-Loops, Streaming Callback Webhooks, and Event-Driven Ingestion</td>
+                        </tr>
+                        <tr>
+                            <td>Azure Data Factory / Synapse ETL</td>
+                            <td>Semantic Document Chunking Pipelines, Multi-Vector Embedding Ingestion, and Hybrid Retrieval RAG</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects-view" class="view-section">
+        <h2 class="section-heading">AIML Projects</h2>
+        <p class="projects-header-desc">Production-grade AI microservices mapping fundamental learning paths to advanced agentic frameworks.</p>
+        
+        <div class="aiml-grid">
+            <div class="aiml-card">
+                <h3>Python Foundations</h3>
+                <p>Exploratory Data Analysis and Python basics for ML pipelines.</p>
+            </div>
+            <div class="aiml-card">
+                <h3>Machine Learning</h3>
+                <p>Regression, Decision Trees, K-Means Clustering for transactional optimizations.</p>
+            </div>
+            <div class="aiml-card">
+                <h3>Advanced ML</h3>
+                <p>Random Forest, Boosting ensembles, and hyperparameter tuning optimizations.</p>
+            </div>
+            <div class="aiml-card">
+                <h3>Neural Networks</h3>
+                <p>Deep learning architectures, tensor arrays, and weights optimization techniques.</p>
+            </div>
+            <div class="aiml-card">
+                <h3>NLP with Gen AI</h3>
+                <p>Stateful RAG systems, complex LLM microservices, and semantic prompt engineering.</p>
+            </div>
+			<div class="aiml-card">
+                <h3>AI Agents for Automation</h3>
+                <p>Image classification, convolutional object detection, and OpenCV stream processing.</p>
+            </div>
+            <div class="aiml-card">
+                <h3>Computer Vision</h3>
+                <p>Image classification, convolutional object detection, and OpenCV stream processing.</p>
+            </div>
+            <div class="aiml-card">
+                <h3>Model Deployment</h3>
+                <p>Docker container isolation, production CI/CD workflows, and MLOps system telemetry.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills-view" class="view-section">
+        <h2 class="section-heading">Enterprise &amp; AI Tech Stack</h2>
+        <div class="skills-category-grid">
+            <div class="skills-cat-card">
+                <h3>Generative &amp; Agentic AI</h3>
+                <div class="skills-list-tags">
+                    <span class="skill-tag">LangGraph</span>
+                    <span class="skill-tag">LangChain</span>
+                    <span class="skill-tag">LlamaIndex</span>
+                    <span class="skill-tag">Semantic Kernel</span>
+                    <span class="skill-tag">Azure OpenAI</span>
+                    <span class="skill-tag">Prompt Engineering</span>
+                </div>
+            </div>
+            <div class="skills-cat-card">
+                <h3>Azure Cloud Infrastructure</h3>
+                <div class="skills-list-tags">
+                    <span class="skill-tag">Azure APIM</span>
+                    <span class="skill-tag">Logic Apps</span>
+                    <span class="skill-tag">Service Bus</span>
+                    <span class="skill-tag">Azure Functions</span>
+                    <span class="skill-tag">Azure AI Search</span>
+                    <span class="skill-tag">KeyVault</span>
+                </div>
+            </div>
+            <div class="skills-cat-card">
+                <h3>Machine Learning &amp; Ops</h3>
+                <div class="skills-list-tags">
+                    <span class="skill-tag">Python (Scikit-Learn)</span>
+                    <span class="skill-tag">PyTorch</span>
+                    <span class="skill-tag">Docker</span>
+                    <span class="skill-tag">MLOps Pipelines</span>
+                    <span class="skill-tag">Arize Phoenix</span>
+                    <span class="skill-tag">OpenTelemetry</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact-view" class="view-section">
+        <h2 class="section-heading">Connect with Me</h2>
+        <div class="contact-wrapper">
+            <form onsubmit="event.preventDefault(); alert('Message successfully sent!');">
+                <div class="form-group">
+                    <label>Your Name</label>
+                    <input type="text" placeholder="John Doe" required>
+                </div>
+                <div class="form-group">
+                    <label>Email Address</label>
+                    <input type="email" placeholder="john@enterprise.com" required>
+                </div>
+                <div class="form-group">
+                    <label>Message</label>
+                    <textarea rows="5" placeholder="Discussing an architecture project or AI engineering role..." required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Send Message</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <div>&copy; 2026 Karthick Boomirajan | AI Portfolio</div>
+        <div>Built for Enterprise Cloud &amp; Cognitive Architecture Platforms</div>
+    </footer>
+
+    <script>
+        function switchPage(pageId) {
+            document.querySelectorAll('.view-section').forEach(section => section.classList.remove('active'));
+            document.querySelectorAll('nav a').forEach(link => link.classList.remove('active'));
+
+            document.getElementById(pageId + '-view').classList.add('active');
+            const targetNavLink = document.getElementById('nav-' + pageId);
+            if (targetNavLink) targetNavLink.classList.add('active');
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
